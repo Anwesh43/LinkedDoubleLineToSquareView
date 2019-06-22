@@ -203,4 +203,26 @@ class DoubleLineToSquareView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : DoubleLineToSquareView) {
+
+        private val dlts : DoubleLineToSquare = DoubleLineToSquare(0)
+        private val animator : Animator = Animator(view)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            dlts.draw(canvas, paint)
+            animator.animate {
+                dlts.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            dlts.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
