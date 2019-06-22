@@ -226,4 +226,13 @@ class DoubleLineToSquareView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : DoubleLineToSquareView {
+            val view : DoubleLineToSquareView = DoubleLineToSquareView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
