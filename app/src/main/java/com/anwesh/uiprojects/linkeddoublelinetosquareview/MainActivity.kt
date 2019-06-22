@@ -17,5 +17,4 @@ class MainActivity : AppCompatActivity() {
 fun MainActivity.fullScreen() {
     supportActionBar?.hide()
     window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-    fullScreen()
 }

@@ -20,6 +20,7 @@ val strokeFactor : Int = 90
 val sizeFactor : Float = 2.9f
 val foreColor : Int = Color.parseColor("#009688")
 val backColor : Int = Color.parseColor("#BDBDBD")
+val delay : Long = 20
 
 fun Int.inverse() : Float = 1f / this
 fun Float.scaleFactor() : Float = Math.floor(this / scDiv).toFloat()
@@ -64,9 +65,12 @@ fun Canvas.drawDLSNode(i : Int, scale : Float, paint : Paint) {
     val sc2 : Float = scale.divideScale(1, 2)
     save()
     translate(w / 2, gap * (i + 1))
-    scale(sc2, sc2)
+    scale(1f + sc2, 1f + sc2)
     for (j in 0..(lines / 2 - 1)) {
+        save()
+        scale(1f, 1f - 2 * j)
         drawDoubleRotLine(j, size, sc1, paint)
+        restore()
     }
     restore()
 }
@@ -115,7 +119,7 @@ class DoubleLineToSquareView(ctx : Context) : View(ctx) {
             if (animated) {
                 cb()
                 try {
-                    Thread.sleep(50)
+                    Thread.sleep(delay)
                     view.invalidate()
                 } catch(ex : Exception) {
 
